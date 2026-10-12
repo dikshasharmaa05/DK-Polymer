@@ -1,0 +1,26 @@
+---
+import Ph from './Ph.astro';
+import Annotation from './Annotation.astro';
+interface Spec { property: string; unit: string; value: string; method: string }
+interface Props { specs: Spec[]; caption: string }
+const { specs, caption } = Astro.props;
+---
+<div class="table-scroll" role="region" aria-label={caption} tabindex="0">
+  <Annotation tag="GSEO" text="specs as HTML table, never an image" />
+  <table class="spec-table">
+    <caption>{caption}</caption>
+    <thead>
+      <tr><th scope="col">Property</th><th scope="col">Value</th><th scope="col">Unit</th><th scope="col">Test method</th></tr>
+    </thead>
+    <tbody>
+      {specs.map((s) => (
+        <tr>
+          <th scope="row">{s.property}</th>
+          <td><Ph text={s.value} /></td>
+          <td>{s.unit || '–'}</td>
+          <td>{s.method ? <Ph text={s.method} /> : '–'}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

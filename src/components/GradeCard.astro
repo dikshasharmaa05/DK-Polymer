@@ -1,0 +1,14 @@
+---
+import { href } from '../lib/url';
+import Ph from './Ph.astro';
+import ImageBox from './ImageBox.astro';
+interface Props { product: { slug: string; name: string; summary: string; gradeNote: string }; headingLevel?: 2 | 3 }
+const { product: p, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}`;
+---
+<article class="card">
+  <ImageBox alt={`Close-up of ${p.name} granules`} ratio="4 / 3" />
+  <H><a href={href(`/products/${p.slug}/`)}>{p.name}</a></H>
+  <Ph as="p" class="small" text={p.gradeNote} />
+  <a class="btn btn-secondary" href={href(`/products/${p.slug}/`)} data-event="grade_view_click">View specs<span class="sr-only"> for {p.name}</span></a>
+</article>

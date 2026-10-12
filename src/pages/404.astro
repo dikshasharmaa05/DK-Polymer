@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { href } from '../lib/url';
+---
+<BaseLayout
+  title="Page Not Found | DK Polymer"
+  description="The page you are looking for does not exist."
+  path="/404.html"
+  noindex
+>
+  <div class="wrap">
+    <h1>Page not found</h1>
+    <p class="lead">We could not find that page. Try one of these:</p>
+    <ul>
+      <li><a href={href('/')}>Home</a></li>
+      <li><a href={href('/products/')}>Recycled PBT grades</a></li>
+      <li><a href={href('/sell-your-scrap/')}>Sell your PBT scrap</a></li>
+      <li><a href={href('/request-a-quote/')}>Request a quote</a></li>
+      <li><a href={href('/contact/')}>Contact</a></li>
+    </ul>
+  </div>
+</BaseLayout>

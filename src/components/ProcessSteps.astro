@@ -1,0 +1,15 @@
+---
+import Ph from './Ph.astro';
+interface Step { title: string; text?: string }
+interface Props { steps: Step[]; label: string; flow?: boolean }
+const { steps, label, flow = false } = Astro.props;
+---
+<ol class:list={['steps', { 'steps-flow': flow }]} aria-label={label}>
+  {steps.map((s, i) => (
+    <li>
+      <span class="step-num" aria-hidden="true">{i + 1}</span>
+      <strong>{s.title}</strong>
+      {s.text && <Ph as="p" text={s.text} />}
+    </li>
+  ))}
+</ol>

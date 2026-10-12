@@ -1,0 +1,165 @@
+[
+  {
+    "slug": "pbt-natural",
+    "name": "Recycled PBT Natural",
+    "shortName": "PBT Natural",
+    "gradeNote": "[PLACEHOLDER: confirm grade name and code]",
+    "title": "Recycled PBT Natural Granules | DK Polymer",
+    "description": "Recycled PBT natural (unfilled) granules from post-industrial scrap, by DK Polymer, Bawana, Delhi. Specifications, applications, MOQ and quote request.",
+    "summary": "Recycled PBT Natural is an unfilled, uncoloured PBT granule made from sorted post-industrial scrap collected from injection molders. [PLACEHOLDER: confirm source material, typical use and how it compares with virgin PBT].",
+    "specs": [
+      {
+        "property": "Melt flow index (MFI)",
+        "unit": "g/10 min",
+        "value": "[PLACEHOLDER: MFI value]",
+        "method": "[PLACEHOLDER: MFI test method and conditions]"
+      },
+      {
+        "property": "Moisture content",
+        "unit": "%",
+        "value": "[PLACEHOLDER: moisture value]",
+        "method": "[PLACEHOLDER: moisture test method]"
+      },
+      {
+        "property": "Glass fibre content",
+        "unit": "%",
+        "value": "[PLACEHOLDER: glass fibre % value]",
+        "method": "[PLACEHOLDER: glass fibre % test method]"
+      },
+      {
+        "property": "Tensile strength",
+        "unit": "MPa",
+        "value": "[PLACEHOLDER: tensile strength value]",
+        "method": "[PLACEHOLDER: tensile strength test method]"
+      },
+      {
+        "property": "Colour",
+        "unit": "",
+        "value": "[PLACEHOLDER: colour description]",
+        "method": "Visual"
+      },
+      {
+        "property": "Packaging",
+        "unit": "",
+        "value": "[PLACEHOLDER: e.g. bag size in kg]",
+        "method": ""
+      }
+    ],
+    "moq": "[PLACEHOLDER: minimum order quantity]",
+    "leadTime": "[PLACEHOLDER: lead time]",
+    "industries": [
+      "electrical-electronics",
+      "home-appliances"
+    ],
+    "applications": "[PLACEHOLDER: typical parts molded with this grade]"
+  },
+  {
+    "slug": "pbt-black",
+    "name": "Recycled PBT Black",
+    "shortName": "PBT Black",
+    "gradeNote": "[PLACEHOLDER: confirm grade name and code]",
+    "title": "Recycled PBT Black Granules | DK Polymer",
+    "description": "Recycled PBT black granules from post-industrial scrap, by DK Polymer, Bawana, Delhi. Specifications, applications, MOQ and quote request.",
+    "summary": "Recycled PBT Black is a black PBT granule made from sorted post-industrial scrap collected from injection molders. [PLACEHOLDER: confirm whether filled or unfilled, colouring method and typical use].",
+    "specs": [
+      {
+        "property": "Melt flow index (MFI)",
+        "unit": "g/10 min",
+        "value": "[PLACEHOLDER: MFI value]",
+        "method": "[PLACEHOLDER: MFI test method and conditions]"
+      },
+      {
+        "property": "Moisture content",
+        "unit": "%",
+        "value": "[PLACEHOLDER: moisture value]",
+        "method": "[PLACEHOLDER: moisture test method]"
+      },
+      {
+        "property": "Glass fibre content",
+        "unit": "%",
+        "value": "[PLACEHOLDER: glass fibre % value]",
+        "method": "[PLACEHOLDER: glass fibre % test method]"
+      },
+      {
+        "property": "Tensile strength",
+        "unit": "MPa",
+        "value": "[PLACEHOLDER: tensile strength value]",
+        "method": "[PLACEHOLDER: tensile strength test method]"
+      },
+      {
+        "property": "Colour",
+        "unit": "",
+        "value": "[PLACEHOLDER: colour description]",
+        "method": "Visual"
+      },
+      {
+        "property": "Packaging",
+        "unit": "",
+        "value": "[PLACEHOLDER: e.g. bag size in kg]",
+        "method": ""
+      }
+    ],
+    "moq": "[PLACEHOLDER: minimum order quantity]",
+    "leadTime": "[PLACEHOLDER: lead time]",
+    "industries": [
+      "electrical-electronics",
+      "automotive-components",
+      "home-appliances"
+    ],
+    "applications": "[PLACEHOLDER: typical parts molded with this grade]"
+  },
+  {
+    "slug": "pbt-glass-filled-30",
+    "name": "Recycled PBT GF30 (30% glass-filled)",
+    "shortName": "PBT GF30",
+    "gradeNote": "[PLACEHOLDER: confirm grade name, code and glass fibre percentage]",
+    "title": "Recycled PBT GF30 Glass-Filled Granules | DK Polymer",
+    "description": "Recycled 30% glass-filled PBT (GF30) granules from post-industrial scrap, by DK Polymer, Bawana, Delhi. Specifications, applications, MOQ and quote request.",
+    "summary": "Recycled PBT GF30 is a glass-fibre-reinforced PBT granule made from sorted post-industrial glass-filled PBT scrap collected from injection molders. [PLACEHOLDER: confirm glass content tolerance and typical use].",
+    "specs": [
+      {
+        "property": "Melt flow index (MFI)",
+        "unit": "g/10 min",
+        "value": "[PLACEHOLDER: MFI value]",
+        "method": "[PLACEHOLDER: MFI test method and conditions]"
+      },
+      {
+        "property": "Moisture content",
+        "unit": "%",
+        "value": "[PLACEHOLDER: moisture value]",
+        "method": "[PLACEHOLDER: moisture test method]"
+      },
+      {
+        "property": "Glass fibre content",
+        "unit": "%",
+        "value": "[PLACEHOLDER: nominal 30, confirm tolerance]",
+        "method": "[PLACEHOLDER: glass fibre % test method, e.g. ash content]"
+      },
+      {
+        "property": "Tensile strength",
+        "unit": "MPa",
+        "value": "[PLACEHOLDER: tensile strength value]",
+        "method": "[PLACEHOLDER: tensile strength test method]"
+      },
+      {
+        "property": "Colour",
+        "unit": "",
+        "value": "[PLACEHOLDER: colour description]",
+        "method": "Visual"
+      },
+      {
+        "property": "Packaging",
+        "unit": "",
+        "value": "[PLACEHOLDER: e.g. bag size in kg]",
+        "method": ""
+      }
+    ],
+    "moq": "[PLACEHOLDER: minimum order quantity]",
+    "leadTime": "[PLACEHOLDER: lead time]",
+    "industries": [
+      "automotive-components",
+      "electrical-electronics"
+    ],
+    "applications": "[PLACEHOLDER: typical parts molded with this grade]"
+  }
+]

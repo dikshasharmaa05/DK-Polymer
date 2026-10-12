@@ -1,0 +1,29 @@
+---
+import site from '../data/site.json';
+import { href } from '../lib/url';
+---
+<div class="proto-banner" role="note" aria-label="Prototype notice">
+  <p>
+    <strong>PROTOTYPE {site.version}</strong>, not final design.
+    <a href={href('/prototype-map/')}>Prototype map and journeys</a>
+  </p>
+  <button type="button" class="anno-toggle" aria-pressed="false" data-anno-toggle>Show annotations</button>
+</div>
+
+<script>
+  const KEY = 'dk-annotations';
+  const root = document.documentElement;
+  document.querySelectorAll<HTMLButtonElement>('[data-anno-toggle]').forEach((btn) => {
+    const sync = () => {
+      const on = root.classList.contains('show-annotations');
+      btn.setAttribute('aria-pressed', String(on));
+      btn.textContent = on ? 'Hide annotations' : 'Show annotations';
+    };
+    sync();
+    btn.addEventListener('click', () => {
+      root.classList.toggle('show-annotations');
+      try { localStorage.setItem(KEY, root.classList.contains('show-annotations') ? 'on' : 'off'); } catch {}
+      sync();
+    });
+  });
+</script>

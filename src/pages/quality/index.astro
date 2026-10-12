@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import products from '../../data/products.json';
+import { href } from '../../lib/url';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import CTA from '../../components/CTA.astro';
+
+const parameters = products[0].specs.filter((s) => s.method && s.method !== 'Visual');
+---
+<BaseLayout
+  title="Quality Control and Batch Testing of Recycled PBT | DK Polymer"
+  description="How DK Polymer controls recycled PBT quality: QA process steps, test parameters, certificates and batch traceability from injection-molder scrap to granules."
+  path="/quality/"
+  crumbs={[{ name: 'Quality', path: '/quality/' }]}
+>
+  <div class="wrap">
+    <h1>Quality control and batch traceability</h1>
+    <p class="lead">DK Polymer sources PBT scrap directly from injection molders, so each batch of granules can be traced to known source material. <Ph text="[PLACEHOLDER: summarise QA approach in one sentence]" /></p>
+
+    <section class="section" aria-labelledby="process-h">
+      <h2 id="process-h">QA process</h2>
+      <ProcessSteps label="QA process steps" steps={[
+        { title: 'Incoming scrap check', text: '[PLACEHOLDER: what is checked on arrival, e.g. material type, contamination]' },
+        { title: 'Sorting and segregation', text: '[PLACEHOLDER: how scrap is sorted by grade and colour]' },
+        { title: 'Reprocessing', text: '[PLACEHOLDER: grinding, drying and extrusion controls]' },
+        { title: 'Batch testing', text: '[PLACEHOLDER: which tests, how often, in-house or external lab]' },
+        { title: 'Release and dispatch', text: '[PLACEHOLDER: release criteria and documents sent with the batch]' },
+      ]} />
+    </section>
+
+    <section class="section" aria-labelledby="params-h">
+      <Annotation tag="AEO" text="question heading + direct answer" />
+      <h2 id="params-h">Which parameters do you test?</h2>
+      <p class="answer"><Ph text="[PLACEHOLDER: direct 1–2 sentence answer, e.g. which parameters are tested on every batch]" /></p>
+      <div class="table-scroll" role="region" aria-label="Test parameters" tabindex="0">
+        <table>
+          <caption>Test parameters</caption>
+          <thead><tr><th scope="col">Parameter</th><th scope="col">Unit</th><th scope="col">Method</th><th scope="col">Frequency</th></tr></thead>
+          <tbody>
+            {parameters.map((s) => (
+              <tr><th scope="row">{s.property}</th><td>{s.unit}</td><td><Ph text={s.method} /></td><td><Ph text={`[PLACEHOLDER: ${s.property} test frequency]`} /></td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="certs-h">
+      <Annotation tag="CONVERSION" text="trust: never show certificates that are not held" />
+      <h2 id="certs-h">Certificates</h2>
+      <p><Ph text="[PLACEHOLDER: none confirmed]" /> Certificate cards appear here only for certificates DK Polymer actually holds.</p>
+      <div class="grid grid-3">
+        {[1, 2, 3].map((n) => (
+          <article class="card">
+            <h3><Ph text={`[PLACEHOLDER: certificate ${n} name]`} /></h3>
+            <p class="small">Issuer, scope and validity: <Ph text="[PLACEHOLDER: issuer, scope, validity]" /></p>
+            <a class="btn btn-secondary" href={href('/contact/')} data-event="certificate_request_click">Request a copy<span class="sr-only"> of certificate {n}</span></a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="trace-h">
+      <h2 id="trace-h">How does batch traceability work?</h2>
+      <p class="answer">Each batch of granules is linked to the scrap it was made from. <Ph text="[PLACEHOLDER: confirm how batches are numbered and what records are kept]" /></p>
+      <ProcessSteps flow label="Traceability chain" steps={[
+        { title: 'Source molder', text: 'Scrap received from a known injection molder.' },
+        { title: 'Scrap lot', text: '[PLACEHOLDER: lot ID format]' },
+        { title: 'Production batch', text: '[PLACEHOLDER: batch ID format]' },
+        { title: 'Test report', text: '[PLACEHOLDER: report reference]' },
+        { title: 'Delivery', text: 'Batch number on bag label and invoice [PLACEHOLDER: confirm].' },
+      ]} />
+    </section>
+
+    <p>See specifications by grade: {products.map((p, i) => <>{i > 0 && ' · '}<a href={href(`/products/${p.slug}/`)}>{p.shortName}</a></>)}</p>
+
+    <CTA
+      heading="Test it in your own process"
+      text="Request a sample to run a trial molding before your first order."
+      location="quality"
+      actions={[
+        { label: 'Request a sample', path: '/request-a-quote/?sample=yes', event: 'cta_sample_click' },
+        { label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click', variant: 'secondary' },
+      ]}
+    />
+  </div>
+</BaseLayout>

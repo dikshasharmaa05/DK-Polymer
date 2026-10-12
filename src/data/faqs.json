@@ -1,0 +1,111 @@
+[
+  {
+    "id": "what-is-recycled-pbt-used-for",
+    "audience": "buyer",
+    "home": true,
+    "question": "What is recycled PBT used for?",
+    "answer": "Recycled PBT is used to injection-mold parts such as electrical connectors, switch housings, automotive components and appliance parts, where the grade's specifications meet the part's requirements. Suitability depends on the grade and should be confirmed with a trial.",
+    "link": { "label": "See PBT grades", "path": "/products/" }
+  },
+  {
+    "id": "do-you-test-every-batch",
+    "audience": "buyer",
+    "home": true,
+    "question": "Do you test every batch?",
+    "answer": "[PLACEHOLDER: Yes or No. Confirm whether every batch is tested, which parameters are measured and whether a test report ships with each delivery.]",
+    "link": { "label": "How we test", "path": "/quality/" }
+  },
+  {
+    "id": "which-grades-do-you-supply",
+    "audience": "buyer",
+    "home": true,
+    "question": "Which recycled PBT grades do you supply?",
+    "answer": "DK Polymer lists three recycled PBT grades: Natural, Black and GF30 (30% glass-filled). [PLACEHOLDER: confirm grade list and whether custom grades are possible.]",
+    "link": { "label": "Compare grades", "path": "/products/" }
+  },
+  {
+    "id": "minimum-order-quantity",
+    "audience": "buyer",
+    "question": "What is the minimum order quantity?",
+    "answer": "The minimum order quantity is [PLACEHOLDER: MOQ in kg]. Exact quantities are confirmed in each quote.",
+    "link": { "label": "Request a quote", "path": "/request-a-quote/" }
+  },
+  {
+    "id": "can-i-get-a-sample",
+    "audience": "buyer",
+    "question": "Can I get a sample before ordering?",
+    "answer": "[PLACEHOLDER: confirm sample policy, sample size and whether samples are free or charged.] You can request a sample in the quote form.",
+    "link": { "label": "Request a sample", "path": "/request-a-quote/" }
+  },
+  {
+    "id": "lead-time",
+    "audience": "buyer",
+    "question": "What is the lead time for an order?",
+    "answer": "Lead time is [PLACEHOLDER: typical lead time] from order confirmation. It depends on grade and quantity.",
+    "link": { "label": "Request a quote", "path": "/request-a-quote/" }
+  },
+  {
+    "id": "how-does-recycled-compare-to-virgin",
+    "audience": "buyer",
+    "question": "How does recycled PBT compare with virgin PBT?",
+    "answer": "Recycled PBT can perform close to virgin PBT in many applications, but properties vary with the source scrap and processing. [PLACEHOLDER: add DK Polymer's own comparison data once available.]",
+    "link": { "label": "Read: What is recycled PBT?", "path": "/resources/what-is-recycled-pbt/" }
+  },
+  {
+    "id": "where-do-you-deliver",
+    "audience": "buyer",
+    "question": "Where do you deliver?",
+    "answer": "DK Polymer is based in Bawana Industrial Area, Delhi. Delivery areas: [PLACEHOLDER: confirm delivery regions and whether delivery is included in the price.]",
+    "link": { "label": "Contact us", "path": "/contact/" }
+  },
+  {
+    "id": "do-you-provide-certificates",
+    "audience": "buyer",
+    "question": "Do you provide certificates or test reports?",
+    "answer": "[PLACEHOLDER: list any certificates actually held. None are confirmed for this prototype.] Batch test reports: [PLACEHOLDER: confirm whether supplied].",
+    "link": { "label": "Quality and certificates", "path": "/quality/" }
+  },
+  {
+    "id": "what-scrap-do-you-accept",
+    "audience": "supplier",
+    "home": true,
+    "question": "What scrap do you accept?",
+    "answer": "DK Polymer accepts post-industrial PBT scrap from injection molders, mainly rejected molded parts and runners. [PLACEHOLDER: confirm whether glass-filled, coloured or mixed scrap is accepted.]",
+    "link": { "label": "Sell your scrap", "path": "/sell-your-scrap/" }
+  },
+  {
+    "id": "how-do-i-sell-scrap",
+    "audience": "supplier",
+    "question": "How do I sell my PBT scrap to DK Polymer?",
+    "answer": "Send photos of your scrap on WhatsApp, DK Polymer reviews them and confirms, then arranges collection. You can also use the supplier form.",
+    "link": { "label": "See the 3-step process", "path": "/sell-your-scrap/" }
+  },
+  {
+    "id": "minimum-scrap-quantity",
+    "audience": "supplier",
+    "question": "Is there a minimum scrap quantity for collection?",
+    "answer": "The minimum quantity for collection is [PLACEHOLDER: minimum kg].",
+    "link": { "label": "Sell your scrap", "path": "/sell-your-scrap/" }
+  },
+  {
+    "id": "do-you-collect-scrap",
+    "audience": "supplier",
+    "question": "Do you collect scrap from my factory?",
+    "answer": "Yes, DK Polymer collects scrap from injection molders. Collection area: [PLACEHOLDER: confirm area, e.g. Delhi NCR].",
+    "link": { "label": "Sell your scrap", "path": "/sell-your-scrap/" }
+  },
+  {
+    "id": "how-should-scrap-be-segregated",
+    "audience": "supplier",
+    "question": "How should I segregate PBT scrap?",
+    "answer": "Keep PBT separate from other plastics, and keep glass-filled, natural and coloured PBT in separate bags. [PLACEHOLDER: confirm segregation rules and whether they affect the price.]",
+    "link": { "label": "Segregation guidance", "path": "/sell-your-scrap/" }
+  },
+  {
+    "id": "how-is-scrap-priced",
+    "audience": "supplier",
+    "question": "How is scrap priced and paid?",
+    "answer": "[PLACEHOLDER: describe how scrap price is set, e.g. by type and quality, and payment terms.]",
+    "link": { "label": "Contact us", "path": "/contact/" }
+  }
+]

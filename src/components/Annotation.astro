@@ -1,0 +1,6 @@
+---
+/** Walkthrough label, hidden until "Show annotations" is on. */
+interface Props { tag: 'SEO' | 'GEO' | 'GSEO' | 'AEO' | 'NFR' | 'CONVERSION' | 'UX' | 'DATA'; text: string }
+const { tag, text } = Astro.props;
+---
+<span class="anno" aria-hidden="true">[{tag}: {text}]</span>

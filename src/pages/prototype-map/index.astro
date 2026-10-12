@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import site from '../../data/site.json';
+import { pages } from '../../lib/pages';
+import { href, waLink } from '../../lib/url';
+import { productionRobots } from '../../lib/seo-files';
+
+const groups = [...new Set(pages.map((p) => p.group))];
+
+const journeys = [
+  {
+    name: 'Buyer (specification-driven molder)',
+    steps: [
+      { label: 'Home', url: href('/') },
+      { label: 'Industries', url: href('/industries/') },
+      { label: 'Automotive', url: href('/industries/automotive-components/') },
+      { label: 'PBT GF30', url: href('/products/pbt-glass-filled-30/') },
+      { label: 'Datasheet (PDF)', url: href('/downloads/datasheet-pbt-glass-filled-30.pdf') },
+      { label: 'Request a Quote', url: href('/request-a-quote/?grade=pbt-glass-filled-30') },
+      { label: 'Thank you', url: href('/thank-you/?type=quote') },
+    ],
+  },
+  {
+    name: 'Scrap supplier (injection molder)',
+    steps: [
+      { label: 'Home', url: href('/') },
+      { label: 'Sell Your Scrap', url: href('/sell-your-scrap/') },
+      { label: 'WhatsApp', url: waLink(site.whatsapp.number, site.whatsapp.supplierMessage) },
+      { label: 'or supplier form', url: href('/sell-your-scrap/#supplier-form') },
+      { label: 'Thank you', url: href('/thank-you/?type=scrap') },
+    ],
+  },
+  {
+    name: 'AI / search visitor',
+    steps: [
+      { label: 'FAQ', url: href('/faq/') },
+      { label: 'Grade page', url: href('/products/pbt-natural/') },
+      { label: 'Quality', url: href('/quality/') },
+      { label: 'Request a Quote', url: href('/request-a-quote/') },
+    ],
+  },
+];
+
+const seoFiles = [
+  { label: `robots.txt (served now: ${site.PROTOTYPE ? 'blocks all crawlers' : 'production'})`, path: '/robots.txt' },
+  { label: 'robots.production.txt (used when PROTOTYPE is false)', path: '/robots.production.txt' },
+  { label: 'sitemap-index.xml', path: '/sitemap-index.xml' },
+  { label: 'sitemap-pages.xml', path: '/sitemap-pages.xml' },
+  { label: 'sitemap-products.xml', path: '/sitemap-products.xml' },
+  { label: 'sitemap-industries.xml', path: '/sitemap-industries.xml' },
+  { label: 'llms.txt (AI assistant summary)', path: '/llms.txt' },
+];
+---
+<BaseLayout
+  title="Prototype Map and User Journeys | DK Polymer v0.1"
+  description="Walkthrough hub for the DK Polymer website prototype: every page by type and three clickable user journeys."
+  path="/prototype-map/"
+  crumbs={[{ name: 'Prototype map', path: '/prototype-map/' }]}
+  noindex
+>
+  <div class="wrap">
+    <h1>Prototype map</h1>
+    <p class="lead">Use this page to walk stakeholders through the prototype. Turn on <strong>Show annotations</strong> in the top banner to see why each section exists.</p>
+    <p>Indexing guard: <strong>PROTOTYPE = {String(site.PROTOTYPE)}</strong>. {site.PROTOTYPE
+      ? 'Every page has noindex, nofollow, and robots.txt disallows everything.'
+      : 'Production robots rules and indexing are active.'}</p>
+    <p>Legend: <mark class="ph">[PLACEHOLDER: …]</mark> marks an open decision for the business owner.</p>
+
+    <section class="section" aria-labelledby="journeys-h">
+      <h2 id="journeys-h">User journeys</h2>
+      {journeys.map((j) => (
+        <div>
+          <h3>{j.name}</h3>
+          <ol class="journey">
+            {j.steps.map((s) => <li><a href={s.url} rel={s.url.startsWith('http') ? 'noopener' : undefined}>{s.label}</a></li>)}
+          </ol>
+        </div>
+      ))}
+      <p class="small">In the buyer journey, fill in the form on Request a Quote and submit it to reach Thank you. The direct link above skips the form.</p>
+    </section>
+
+    <section class="section" aria-labelledby="pages-h">
+      <h2 id="pages-h">All pages</h2>
+      <div class="grid grid-3">
+        {groups.map((g) => (
+          <div>
+            <h3>{g}</h3>
+            <ul>
+              {pages.filter((p) => p.group === g).map((p) => <li><a href={href(p.path)}>{p.label}</a> <code class="small">{p.path}</code></li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="seo-h">
+      <h2 id="seo-h">SEO and AI files</h2>
+      <ul>
+        {seoFiles.map((f) => <li><a href={href(f.path)}>{f.label}</a></li>)}
+      </ul>
+      <h3>Production robots.txt</h3>
+      <pre><code>{productionRobots()}</code></pre>
+    </section>
+
+    <section class="section" aria-labelledby="anno-h">
+      <h2 id="anno-h">Annotation labels</h2>
+      <dl>
+        <dt><strong>[SEO]</strong></dt><dd>Search engine basics: headings, breadcrumbs, structure.</dd>
+        <dt><strong>[GEO]</strong></dt><dd>Local search: identical name, address, phone; map; LocalBusiness data.</dd>
+        <dt><strong>[GSEO]</strong></dt><dd>Generative search: short citable facts, HTML tables, dates.</dd>
+        <dt><strong>[AEO]</strong></dt><dd>Answer engines: question headings with a direct answer.</dd>
+        <dt><strong>[NFR]</strong></dt><dd>Non-functional: accessibility, performance.</dd>
+        <dt><strong>[CONVERSION]</strong></dt><dd>Calls to action and trust elements.</dd>
+        <dt><strong>[UX]</strong></dt><dd>Navigation and audience paths.</dd>
+      </dl>
+    </section>
+  </div>
+</BaseLayout>

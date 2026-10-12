@@ -1,0 +1,7 @@
+---
+/** Renders text, marking every [PLACEHOLDER: …] visibly. Use `as` to choose the wrapping element. */
+import { ph } from '../lib/text';
+interface Props { text: string; as?: string; class?: string }
+const { text, as: Tag = 'span', class: className } = Astro.props;
+---
+<Tag class={className} set:html={ph(text)} />

@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import products from '../data/products.json';
+import industries from '../data/industries.json';
+import faqs from '../data/faqs.json';
+import { href, waLink } from '../lib/url';
+import Ph from '../components/Ph.astro';
+import Annotation from '../components/Annotation.astro';
+import ImageBox from '../components/ImageBox.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import GradeCard from '../components/GradeCard.astro';
+import IndustryCard from '../components/IndustryCard.astro';
+import KeyFacts from '../components/KeyFacts.astro';
+import FAQItem from '../components/FAQItem.astro';
+import CTA from '../components/CTA.astro';
+
+const homeFaqs = faqs.filter((f) => f.home);
+---
+<BaseLayout
+  title="Recycled PBT Granules from Post-Industrial Scrap | DK Polymer, Delhi"
+  description={site.description}
+  path="/"
+  includeLocalBusiness
+>
+  <section class="hero">
+    <div class="wrap grid grid-2">
+      <div>
+        <Annotation tag="SEO" text="single H1 with primary keyword" />
+        <h1>Recycled PBT granules from post-industrial scrap</h1>
+        <p class="lead">DK Polymer recycles PBT scrap from injection molders in Bawana, Delhi, into granules for electrical, automotive-component and appliance molders.</p>
+        <Ph as="p" text={site.competitiveAdvantage} />
+        <div class="btn-row">
+          <a class="btn btn-primary" href={href('/request-a-quote/')} data-event="cta_quote_click" data-event-location="home_hero">Request a Quote</a>
+          <a class="btn btn-secondary" href={href('/products/')} data-event="cta_grades_click" data-event-location="home_hero">See grades</a>
+        </div>
+        <Annotation tag="CONVERSION" text="primary CTA above the fold" />
+      </div>
+      <ImageBox alt="Recycled PBT granules and reprocessing line at the Bawana facility" ratio="4 / 3" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="paths-h">
+    <div class="wrap">
+      <Annotation tag="UX" text="two audience paths: buyers and scrap suppliers" />
+      <h2 id="paths-h">How can we help you?</h2>
+      <div class="grid grid-2">
+        <article class="card path-card">
+          <h3>I buy granules</h3>
+          <p>Recycled PBT grades with a specification table for each, batch testing and sample requests.</p>
+          <a class="btn btn-primary" href={href('/products/')} data-event="path_buyer_click">Browse PBT grades</a>
+        </article>
+        <article class="card path-card">
+          <h3>I have PBT scrap</h3>
+          <p>Injection molders: send photos of your rejects and runners on WhatsApp. We review and collect.</p>
+          <a class="btn btn-primary" href={href('/sell-your-scrap/')} data-event="path_supplier_click">Sell your scrap</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="flow-h">
+    <div class="wrap">
+      <Annotation tag="GSEO" text="process explained as plain text, not only a diagram" />
+      <h2 id="flow-h">How post-industrial PBT scrap becomes granules</h2>
+      <p>DK Polymer sources PBT scrap directly from injection molders, so the origin of the material is known.</p>
+      <ProcessSteps flow label="Sourcing flow" steps={[
+        { title: 'Molder scrap', text: 'Rejected parts and runners from injection molders.' },
+        { title: 'Sorting', text: 'Separated by type and colour.' },
+        { title: 'Reprocessing', text: '[PLACEHOLDER: grinding, drying, extrusion steps]' },
+        { title: 'Testing', text: '[PLACEHOLDER: tests per batch]' },
+        { title: 'Granules', text: 'Packed and dispatched.' },
+      ]} />
+      <p><a href={href('/quality/')}>See the quality process in detail</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="grades-h">
+    <div class="wrap">
+      <h2 id="grades-h">Recycled PBT grades</h2>
+      <div class="grid grid-3">
+        {products.map((p) => <GradeCard product={p} />)}
+      </div>
+      <p><a href={href('/products/')}>Compare all grades</a></p>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="industries-h">
+    <div class="wrap">
+      <h2 id="industries-h">Industries we supply</h2>
+      <div class="grid grid-3">
+        {industries.map((i) => <IndustryCard industry={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="trust-h">
+    <div class="wrap">
+      <Annotation tag="CONVERSION" text="trust strip: only confirmed facts, otherwise placeholders" />
+      <h2 id="trust-h">Quality you can check</h2>
+      <ul class="trust-strip">
+        <li><strong>Batch testing</strong><br /><Ph text="[PLACEHOLDER: what is tested per batch]" /></li>
+        <li><strong>Traceability</strong><br />Scrap is sourced directly from known injection molders.</li>
+        <li><strong>Certificates</strong><br /><Ph text="[PLACEHOLDER: none confirmed]" /></li>
+        <li><strong>Samples</strong><br /><Ph text="[PLACEHOLDER: sample policy]" /></li>
+      </ul>
+      <p><a href={href('/quality/')}>How we control quality</a></p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <KeyFacts />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-h">
+    <div class="wrap">
+      <Annotation tag="AEO" text="question headings with direct answers" />
+      <h2 id="faq-h">Frequently asked questions</h2>
+      {homeFaqs.map((f) => <FAQItem id={`home-${f.id}`} question={f.question} answer={f.answer} link={f.link} level={3} />)}
+      <p><a href={href('/faq/')}>All questions for buyers and scrap suppliers</a></p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <CTA
+      heading="Need recycled PBT for your next production run?"
+      text="Tell us the grade, quantity and specifications you need. We reply with a quote."
+      location="home_final"
+      actions={[
+        { label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click' },
+        { label: 'WhatsApp us', path: waLink(site.whatsapp.number, site.whatsapp.buyerMessage), event: 'whatsapp_click', variant: 'secondary', external: true },
+      ]}
+    />
+  </div>
+</BaseLayout>

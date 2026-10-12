@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import site from '../../data/site.json';
+import products from '../../data/products.json';
+import { href, waLink } from '../../lib/url';
+import Annotation from '../../components/Annotation.astro';
+import ErrorSummary from '../../components/ErrorSummary.astro';
+---
+<BaseLayout
+  title="Request a Quote for Recycled PBT Granules | DK Polymer"
+  description="Request a quote or sample for recycled PBT granules (Natural, Black, GF30) from DK Polymer, Delhi. Tell us your grade, quantity and specifications."
+  path="/request-a-quote/"
+  crumbs={[{ name: 'Request a Quote', path: '/request-a-quote/' }]}
+>
+  <div class="wrap">
+    <h1>Request a quote</h1>
+    <p class="lead">Tell us what you need. We reply with price, lead time and sample availability.</p>
+    <p class="small">Prototype: this form only checks your entries in the browser, then shows the thank-you page. Nothing is stored or sent. Prefer chat? <a href={waLink(site.whatsapp.number, site.whatsapp.buyerMessage)} data-event="whatsapp_click" data-event-location="rfq" rel="noopener">WhatsApp us</a>.</p>
+    <Annotation tag="NFR" text="labelled fields, inline errors, error summary, keyboard friendly" />
+
+    <form class="form" data-validate data-success={href('/thank-you/?type=quote')} action={href('/thank-you/')} method="get" aria-describedby="rfq-required-note">
+      <p id="rfq-required-note" class="hint">Fields marked (required) must be filled in.</p>
+      <ErrorSummary />
+
+      <div class="field">
+        <label for="rfq-name">Your name <span class="req">(required)</span></label>
+        <input id="rfq-name" name="name" type="text" autocomplete="name" required aria-describedby="name-error" />
+        <p id="name-error" class="error-msg" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="rfq-company">Company <span class="req">(required)</span></label>
+        <input id="rfq-company" name="company" type="text" autocomplete="organization" required aria-describedby="company-error" />
+        <p id="company-error" class="error-msg" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="rfq-city">City <span class="req">(required)</span></label>
+        <input id="rfq-city" name="city" type="text" autocomplete="address-level2" required aria-describedby="city-error" />
+        <p id="city-error" class="error-msg" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="rfq-phone">Phone <span class="req">(required)</span></label>
+        <input id="rfq-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[+0-9 \(\)\-]{10,16}" data-pattern-error="Enter a phone number with 10 to 15 digits, e.g. +91 98xxx xxxxx." aria-describedby="phone-hint phone-error" />
+        <p id="phone-hint" class="hint">Mobile or landline, with country code if outside India.</p>
+        <p id="phone-error" class="error-msg" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="rfq-email">Email <span class="req">(required)</span></label>
+        <input id="rfq-email" name="email" type="email" autocomplete="email" required aria-describedby="email-error" />
+        <p id="email-error" class="error-msg" aria-live="polite"></p>
+      </div>
+      <div class="field" data-error="Choose a grade, or 'Not sure'.">
+        <label for="rfq-grade">Grade <span class="req">(required)</span></label>
+        <select id="rfq-grade" name="grade" required aria-describedby="grade-error">
+          <option value="">Choose a grade</option>
+          {products.map((p) => <option value={p.slug}>{p.name}</option>)}
+          <option value="not-sure">Not sure, please advise</option>
+        </select>
+        <p id="grade-error" class="error-msg" aria-live="polite"></p>
+        <p class="hint"><a href={href('/products/')}>Compare grades</a></p>
+      </div>
+      <div class="field">
+        <label for="rfq-quantity">Quantity (kg per month) <span class="req">(required)</span></label>
+        <input id="rfq-quantity" name="quantity" type="number" inputmode="numeric" min="1" step="1" required aria-describedby="quantity-error" />
+        <p id="quantity-error" class="error-msg" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="rfq-specs">Required specifications</label>
+        <textarea id="rfq-specs" name="specs" aria-describedby="specs-hint"></textarea>
+        <p id="specs-hint" class="hint">For example MFI range, moisture limit, glass fibre %, colour.</p>
+      </div>
+      <div class="field">
+        <label for="rfq-application">Application</label>
+        <input id="rfq-application" name="application" type="text" aria-describedby="application-hint" />
+        <p id="application-hint" class="hint">What part will you mold? For example connector housing.</p>
+      </div>
+      <fieldset class="field" data-error="Tell us whether you need a sample." aria-describedby="sample-error">
+        <legend>Do you need a sample? <span class="req">(required)</span></legend>
+        <div class="radio-row">
+          <label><input type="radio" id="rfq-sample-yes" name="sample" value="yes" required /> Yes</label>
+          <label><input type="radio" id="rfq-sample-no" name="sample" value="no" /> No</label>
+        </div>
+        <p id="sample-error" class="error-msg" aria-live="polite"></p>
+      </fieldset>
+
+      <div>
+        <button class="btn btn-primary" type="submit" data-event="rfq_submit">Send quote request</button>
+        <Annotation tag="CONVERSION" text="primary conversion; data-event=rfq_submit" />
+      </div>
+      <p class="small">See our <a href={href('/privacy/')}>privacy notice</a>.</p>
+    </form>
+  </div>
+</BaseLayout>
+
+<script>
+  import '../../scripts/forms';
+  // Pre-fill from links such as /request-a-quote/?grade=pbt-black&sample=yes
+  const params = new URLSearchParams(window.location.search);
+  const grade = params.get('grade');
+  const select = document.getElementById('rfq-grade') as HTMLSelectElement | null;
+  if (grade && select && [...select.options].some((o) => o.value === grade)) select.value = grade;
+  const sample = params.get('sample');
+  if (sample === 'yes' || sample === 'no') {
+    const radio = document.getElementById(`rfq-sample-${sample}`) as HTMLInputElement | null;
+    if (radio) radio.checked = true;
+  }
+</script>

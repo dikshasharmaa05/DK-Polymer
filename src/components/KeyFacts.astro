@@ -1,0 +1,14 @@
+---
+import site from '../data/site.json';
+import Ph from './Ph.astro';
+import Annotation from './Annotation.astro';
+interface Props { headingLevel?: 2 | 3 }
+const H = `h${Astro.props.headingLevel ?? 2}`;
+---
+<section class="key-facts" aria-labelledby="key-facts-h">
+  <Annotation tag="GSEO" text="citable facts: short, self-contained, verifiable sentences" />
+  <H id="key-facts-h">Key facts about DK Polymer</H>
+  <ul>
+    {site.keyFacts.map((f) => <Ph as="li" text={f} />)}
+  </ul>
+</section>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import articles from '../../data/articles.json';
+import products from '../../data/products.json';
+import { href } from '../../lib/url';
+import { article as articleSchema } from '../../lib/schema';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import CTA from '../../components/CTA.astro';
+
+const a = articles.find((x) => x.slug === 'what-is-recycled-pbt')!;
+---
+<BaseLayout
+  title={a.title}
+  description={a.description}
+  path={`/resources/${a.slug}/`}
+  crumbs={[{ name: 'Resources', path: '/resources/' }, { name: a.headline, path: `/resources/${a.slug}/` }]}
+  schema={[articleSchema(a)]}
+  ogType="article"
+  lastUpdated={a.dateModified}
+>
+  <article class="wrap">
+    <header>
+      <h1>{a.headline}</h1>
+      <p class="small">By <Ph text={a.author} /> · Published <time datetime={a.datePublished}>{a.datePublished}</time> · Updated <time datetime={a.dateModified}>{a.dateModified}</time></p>
+      <Annotation tag="GSEO" text="byline + dates support citation" />
+    </header>
+
+    <section aria-labelledby="def-h">
+      <h2 id="def-h">What is recycled PBT?</h2>
+      <p class="answer">Recycled PBT is polybutylene terephthalate that has been recovered from scrap or used parts and reprocessed into granules that can be molded again.</p>
+      <p>PBT is a semi-crystalline engineering thermoplastic from the polyester family. Molders choose it for parts that need dimensional stability, electrical insulation and resistance to heat and many chemicals.</p>
+    </section>
+
+    <section aria-labelledby="pi-h">
+      <h2 id="pi-h">What is post-industrial PBT scrap?</h2>
+      <p class="answer">Post-industrial PBT scrap is material left over from manufacturing, such as rejected parts and runners, that never reached a consumer.</p>
+      <p>Because it comes straight from a molding shop, its grade and history are usually known. That makes it easier to sort and reprocess consistently than mixed post-consumer waste.</p>
+    </section>
+
+    <section aria-labelledby="how-h">
+      <h2 id="how-h">How is PBT scrap turned into granules?</h2>
+      <p class="answer">Scrap is sorted, ground, dried, melted and extruded into new granules, then tested before sale.</p>
+      <ProcessSteps label="Typical recycling steps" steps={[
+        { title: 'Sort', text: 'Separate by polymer, filler and colour.' },
+        { title: 'Grind', text: 'Reduce parts and runners to regrind.' },
+        { title: 'Dry', text: 'PBT absorbs moisture, which can degrade it during melt processing, so it is dried first.' },
+        { title: 'Extrude and pelletise', text: 'Melt, filter and cut into granules.' },
+        { title: 'Test', text: '[PLACEHOLDER: DK Polymer-specific tests]' },
+      ]} />
+    </section>
+
+    <section aria-labelledby="use-h">
+      <h2 id="use-h">Where is recycled PBT used?</h2>
+      <p class="answer">Recycled PBT is used in injection-molded parts where its tested properties meet the part's requirements, for example in electrical, automotive and appliance components.</p>
+      <p>Compare DK Polymer grades: {products.map((p, i) => <>{i > 0 && ', '}<a href={href(`/products/${p.slug}/`)}>{p.name}</a></>)}.</p>
+    </section>
+
+    <section aria-labelledby="choose-h">
+      <h2 id="choose-h">How do I choose a recycled PBT supplier?</h2>
+      <p class="answer">Ask for batch test reports, traceability to the source scrap and a sample for a trial molding.</p>
+      <p>See <a href={href('/quality/')}>how DK Polymer tests and traces batches</a>.</p>
+      <p><Ph text="[PLACEHOLDER: technical review of this article by DK Polymer before publishing]" /></p>
+    </section>
+
+    <CTA
+      heading="Try recycled PBT in your process"
+      location="article"
+      actions={[{ label: 'Request a sample', path: '/request-a-quote/?sample=yes', event: 'cta_sample_click' }]}
+    />
+  </article>
+</BaseLayout>

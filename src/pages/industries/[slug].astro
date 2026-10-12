@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import industries from '../../data/industries.json';
+import products from '../../data/products.json';
+import { href } from '../../lib/url';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import ImageBox from '../../components/ImageBox.astro';
+import GradeCard from '../../components/GradeCard.astro';
+import CTA from '../../components/CTA.astro';
+
+export function getStaticPaths() {
+  return industries.map((i) => ({ params: { slug: i.slug }, props: { i } }));
+}
+
+const { i } = Astro.props;
+// Suitable grades are derived from products.json so the grade <-> industry links always agree.
+const grades = products.filter((p) => p.industries.includes(i.slug));
+---
+<BaseLayout
+  title={i.title}
+  description={i.description}
+  path={`/industries/${i.slug}/`}
+  crumbs={[{ name: 'Industries', path: '/industries/' }, { name: i.name, path: `/industries/${i.slug}/` }]}
+>
+  <article class="wrap">
+    <div class="grid grid-2">
+      <div>
+        <h1>Recycled PBT for {i.name.toLowerCase()} molders</h1>
+        <Ph as="p" class="lead" text={i.intro} />
+      </div>
+      <ImageBox alt={`Typical ${i.name.toLowerCase()} parts molded from PBT`} ratio="4 / 3" />
+    </div>
+
+    <section class="section" aria-labelledby="problems-h">
+      <Annotation tag="UX" text="speaks to buyer problems first" />
+      <h2 id="problems-h">What {i.name.toLowerCase()} buyers need from recycled PBT</h2>
+      <ul>{i.problems.map((t) => <Ph as="li" text={t} />)}</ul>
+    </section>
+
+    <section class="section" aria-labelledby="grades-h">
+      <h2 id="grades-h">Suitable grades</h2>
+      <div class="grid grid-3">{grades.map((p) => <GradeCard product={p} />)}</div>
+    </section>
+
+    <section class="section" aria-labelledby="quality-h">
+      <h2 id="quality-h">Quality expectations</h2>
+      <ul>{i.expectations.map((t) => <Ph as="li" text={t} />)}</ul>
+      <p><a href={href('/quality/')}>How DK Polymer tests and traces each batch</a></p>
+    </section>
+
+    <CTA
+      heading={`Request a quote for ${i.name.toLowerCase()} parts`}
+      location={`industry_${i.slug}`}
+      actions={[
+        { label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click' },
+        { label: 'Request a sample', path: '/request-a-quote/?sample=yes', event: 'cta_sample_click', variant: 'secondary' },
+      ]}
+    />
+  </article>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import site from '../../data/site.json';
+import { href, waLink } from '../../lib/url';
+import Ph from '../../components/Ph.astro';
+---
+<BaseLayout
+  title="Thank You | DK Polymer"
+  description="Thank you for contacting DK Polymer. We will get back to you."
+  path="/thank-you/"
+  crumbs={[{ name: 'Thank you', path: '/thank-you/' }]}
+  noindex
+>
+  <div class="wrap">
+    <h1>Thank you</h1>
+    <div data-variant="default">
+      <p class="lead">We have your details and will get back to you within <Ph text="[PLACEHOLDER: response time]" />.</p>
+    </div>
+    <div data-variant="quote" hidden>
+      <p class="lead">Your quote request is in. We will reply with price, lead time and sample availability within <Ph text="[PLACEHOLDER: response time]" />.</p>
+      <p>While you wait: <a href={href('/quality/')}>see how we test each batch</a>.</p>
+    </div>
+    <div data-variant="scrap" hidden>
+      <p class="lead">Thanks for your scrap details. We will contact you within <Ph text="[PLACEHOLDER: response time]" /> to review and arrange collection.</p>
+      <p>Faster: <a href={waLink(site.whatsapp.number, site.whatsapp.supplierMessage)} data-event="whatsapp_scrap_click" data-event-location="thank_you" rel="noopener">send photos on WhatsApp</a>.</p>
+    </div>
+    <p class="small">Prototype: no data was stored or sent.</p>
+    <div class="btn-row">
+      <a class="btn btn-secondary" href={href('/')}>Back to home</a>
+      <a class="btn btn-secondary" href={href('/prototype-map/')}>Prototype map</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const type = new URLSearchParams(window.location.search).get('type');
+  const variant = type === 'quote' || type === 'scrap' ? type : null;
+  if (variant) {
+    document.querySelector<HTMLElement>('[data-variant="default"]')!.hidden = true;
+    document.querySelector<HTMLElement>(`[data-variant="${variant}"]`)!.hidden = false;
+  }
+</script>

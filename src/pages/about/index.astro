@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { href } from '../../lib/url';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import ImageBox from '../../components/ImageBox.astro';
+import KeyFacts from '../../components/KeyFacts.astro';
+import NapBlock from '../../components/NapBlock.astro';
+import CTA from '../../components/CTA.astro';
+---
+<BaseLayout
+  title="About DK Polymer: PBT Recycler in Bawana, Delhi"
+  description="DK Polymer is a PBT recycler in Sector 5, Bawana Industrial Area, Delhi. Company story, facility and key facts."
+  path="/about/"
+  crumbs={[{ name: 'About', path: '/about/' }]}
+  includeLocalBusiness
+>
+  <div class="wrap">
+    <h1>About DK Polymer</h1>
+    <p class="lead">DK Polymer is a PBT recycler in Sector 5, Bawana Industrial Area, Delhi. It turns post-industrial PBT scrap from injection molders into recycled PBT granules.</p>
+
+    <section class="section" aria-labelledby="story-h">
+      <h2 id="story-h">Our story</h2>
+      <p><Ph text="[PLACEHOLDER: founding story: who started DK Polymer, when and why]" /></p>
+      <p>DK Polymer has sold mainly through IndiaMART and long-standing relationships with molders. <Ph text="[PLACEHOLDER: confirm whether to mention sales channels publicly]" /></p>
+      <p><Ph text="[PLACEHOLDER: milestones, e.g. new machinery, capacity expansions]" /></p>
+    </section>
+
+    <section class="section" aria-labelledby="facility-h">
+      <h2 id="facility-h">Our Bawana facility</h2>
+      <div class="grid grid-2">
+        <div>
+          <p>The facility is in Sector 5, Bawana Industrial Area, Delhi.</p>
+          <ul>
+            <li>Floor area: <Ph text="[PLACEHOLDER: floor area]" /></li>
+            <li>Equipment: <Ph text="[PLACEHOLDER: grinders, dryers, extruders]" /></li>
+            <li>Testing equipment: <Ph text="[PLACEHOLDER: testing equipment]" /></li>
+            <li>Team size: <Ph text="[PLACEHOLDER: team size]" /></li>
+          </ul>
+        </div>
+        <ImageBox alt="Exterior of the DK Polymer facility in Bawana Industrial Area" ratio="4 / 3" />
+      </div>
+    </section>
+
+    <section class="section">
+      <KeyFacts />
+    </section>
+
+    <section class="section" aria-labelledby="materials-h">
+      <h2 id="materials-h">Materials we work with</h2>
+      <p>DK Polymer works with PBT (polybutylene terephthalate), including natural, black and glass-filled PBT. <Ph text="[PLACEHOLDER: confirm whether any other polymers are processed]" /></p>
+    </section>
+
+    <section class="section" aria-labelledby="visit-h">
+      <Annotation tag="GEO" text="location and NAP" />
+      <h2 id="visit-h">Find us</h2>
+      <NapBlock />
+      <p><a href={href('/contact/')}>Contact details, hours and directions</a></p>
+    </section>
+
+    <CTA
+      heading="Work with DK Polymer"
+      location="about"
+      actions={[
+        { label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click' },
+        { label: 'Sell your scrap', path: '/sell-your-scrap/', event: 'cta_supplier_click', variant: 'secondary' },
+      ]}
+    />
+  </div>
+</BaseLayout>

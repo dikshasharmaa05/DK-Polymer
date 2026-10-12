@@ -1,0 +1,61 @@
+{
+  "PROTOTYPE": true,
+  "version": "v0.1",
+  "name": "DK Polymer",
+  "legalName": "[PLACEHOLDER: registered legal name]",
+  "siteUrl": "https://www.dkpolymer.example",
+  "lastUpdated": "2026-10-12",
+  "language": "en-IN",
+  "tagline": "Recycled PBT granules from post-industrial scrap",
+  "description": "DK Polymer recycles post-industrial PBT scrap from injection molders in Delhi NCR and supplies recycled PBT granules to electrical, automotive-component and home-appliance molders.",
+  "nap": {
+    "name": "DK Polymer",
+    "streetAddress": "Sector 5, Bawana Industrial Area",
+    "locality": "Delhi",
+    "region": "Delhi",
+    "postalCode": "[PLACEHOLDER: confirm PIN]",
+    "country": "India",
+    "countryCode": "IN",
+    "phoneDisplay": "[PLACEHOLDER: phone number]",
+    "phoneHref": "+910000000000",
+    "emailDisplay": "[PLACEHOLDER: email address]",
+    "emailHref": "info@dkpolymer.example"
+  },
+  "whatsapp": {
+    "number": "910000000000",
+    "display": "[PLACEHOLDER: WhatsApp number]",
+    "buyerMessage": "Hello DK Polymer, I would like a quote for recycled PBT granules.",
+    "supplierMessage": "Hello DK Polymer, I have PBT scrap to sell. Sending photos."
+  },
+  "geo": {
+    "latitude": "[PLACEHOLDER: latitude]",
+    "longitude": "[PLACEHOLDER: longitude]"
+  },
+  "openingHours": {
+    "display": "[PLACEHOLDER: e.g. Monday to Saturday, 09:30 to 18:30]",
+    "schema": "[PLACEHOLDER: e.g. Mo-Sa 09:30-18:30]"
+  },
+  "areaServed": ["Delhi NCR", "India", "[PLACEHOLDER: confirm other regions or export markets]"],
+  "googleBusinessProfileUrl": "https://maps.google.com/?q=DK+Polymer+Bawana+Industrial+Area+Delhi",
+  "googleBusinessProfileNote": "[PLACEHOLDER: Google Business Profile link]",
+  "directionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Sector+5+Bawana+Industrial+Area+Delhi",
+  "competitiveAdvantage": "[PLACEHOLDER: competitive advantage, e.g. what makes DK Polymer granules different]",
+  "keyFacts": [
+    "DK Polymer recycles post-industrial PBT (polybutylene terephthalate) scrap.",
+    "DK Polymer collects rejected molded parts and runners directly from injection molders.",
+    "DK Polymer is located in Sector 5, Bawana Industrial Area, Delhi, India.",
+    "DK Polymer sells recycled PBT granules to injection molders.",
+    "DK Polymer was founded in [PLACEHOLDER: year].",
+    "DK Polymer has a processing capacity of [PLACEHOLDER: capacity] tonnes per month.",
+    "DK Polymer serves [PLACEHOLDER: confirm regions] from its Bawana facility."
+  ],
+  "nav": [
+    { "label": "Products", "path": "/products/" },
+    { "label": "Industries", "path": "/industries/" },
+    { "label": "Quality", "path": "/quality/" },
+    { "label": "Sell Your Scrap", "path": "/sell-your-scrap/" },
+    { "label": "About", "path": "/about/" },
+    { "label": "Resources", "path": "/resources/" },
+    { "label": "Contact", "path": "/contact/" }
+  ]
+}

@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import site from '../../data/site.json';
+import faqs from '../../data/faqs.json';
+import { href, waLink } from '../../lib/url';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import ImageBox from '../../components/ImageBox.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import ErrorSummary from '../../components/ErrorSummary.astro';
+
+const wa = waLink(site.whatsapp.number, site.whatsapp.supplierMessage);
+const scrapTypes = [
+  { name: 'PBT rejects (molded parts)', accepted: 'Yes' },
+  { name: 'PBT runners and sprues', accepted: 'Yes' },
+  { name: 'Glass-filled PBT' },
+  { name: 'Coloured PBT' },
+  { name: 'Purgings and lumps' },
+  { name: 'Mixed or contaminated plastic' },
+];
+const supplierFaqs = faqs.filter((f) => f.audience === 'supplier').slice(0, 3);
+---
+<BaseLayout
+  title="Sell Your PBT Scrap: Rejects and Runners Collection, Delhi NCR | DK Polymer"
+  description="Injection molders: sell your PBT scrap (rejected parts and runners) to DK Polymer. Send photos on WhatsApp, we review and collect from your factory."
+  path="/sell-your-scrap/"
+  crumbs={[{ name: 'Sell Your Scrap', path: '/sell-your-scrap/' }]}
+>
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div>
+        <h1>Sell your PBT scrap</h1>
+        <p class="lead">DK Polymer buys post-industrial PBT scrap, meaning rejected molded parts and runners, directly from injection molders and collects it from your factory.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={wa} data-event="whatsapp_scrap_click" data-event-location="scrap_hero" rel="noopener">Send photos on WhatsApp</a>
+          <a class="btn btn-secondary" href="#supplier-form" data-event="supplier_form_jump">Use the supplier form</a>
+        </div>
+        <p class="small">WhatsApp: <Ph text={site.whatsapp.display} /></p>
+        <Annotation tag="CONVERSION" text="WhatsApp first: mirrors the current workflow" />
+      </div>
+      <ImageBox alt="Bags of segregated PBT runners and rejected parts ready for collection" ratio="4 / 3" />
+    </div>
+
+    <section class="section" aria-labelledby="who-h">
+      <h2 id="who-h">Who do we buy from?</h2>
+      <p class="answer">DK Polymer buys from injection molders that produce PBT parts and generate rejects and runners. <Ph text="[PLACEHOLDER: confirm whether traders or other sources are accepted]" /></p>
+    </section>
+
+    <section class="section" aria-labelledby="accept-h">
+      <h2 id="accept-h">What scrap do you accept?</h2>
+      <p class="answer">DK Polymer accepts post-industrial PBT scrap: rejected molded parts and runners.</p>
+      <div class="table-scroll" role="region" aria-label="Accepted scrap types" tabindex="0">
+        <table>
+          <caption>Accepted scrap types</caption>
+          <thead><tr><th scope="col">Scrap type</th><th scope="col">Accepted?</th><th scope="col">Notes</th></tr></thead>
+          <tbody>
+            {scrapTypes.map((t) => (
+              <tr>
+                <th scope="row">{t.name}</th>
+                <td>{t.accepted ?? <Ph text={`[PLACEHOLDER: ${t.name.toLowerCase()} accepted? yes/no]`} />}</td>
+                <td><Ph text={`[PLACEHOLDER: ${t.name.toLowerCase()} condition requirements]`} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="process-h">
+      <Annotation tag="UX" text="3 steps mirror the current WhatsApp workflow" />
+      <h2 id="process-h">How does scrap collection work?</h2>
+      <p class="answer">Send photos on WhatsApp, we review them and confirm a price, then we collect from your factory.</p>
+      <ProcessSteps flow label="Scrap collection process" steps={[
+        { title: 'Send photos on WhatsApp', text: 'Photos of the scrap, approximate quantity and your location.' },
+        { title: 'We review', text: 'We confirm the material and offer a price. [PLACEHOLDER: typical response time]' },
+        { title: 'We collect', text: 'We arrange pickup from your factory. [PLACEHOLDER: collection area, vehicle, payment terms]' },
+      ]} />
+      <p>Every collection closes the loop: your scrap becomes granules that molders can use again.</p>
+    </section>
+
+    <section class="section" aria-labelledby="seg-h">
+      <h2 id="seg-h">How should I segregate my scrap?</h2>
+      <p class="answer">Keep PBT separate from other plastics, and keep each PBT type in its own bag.</p>
+      <ul>
+        <li>Separate natural, black and glass-filled PBT.</li>
+        <li>Keep out metal inserts, labels and other plastics where possible.</li>
+        <li>Keep scrap dry and covered.</li>
+        <li><Ph text="[PLACEHOLDER: any further rules and how segregation affects price]" /></li>
+      </ul>
+    </section>
+
+    <section class="section" id="supplier-form" aria-labelledby="form-h">
+      <h2 id="form-h">Supplier form</h2>
+      <p>Prefer a form? Tell us about your scrap and we will contact you. Prototype: nothing is stored or sent.</p>
+      <form class="form" data-validate data-success={href('/thank-you/?type=scrap')} action={href('/thank-you/')} method="get">
+        <ErrorSummary />
+        <div class="field">
+          <label for="sup-name">Your name <span class="req">(required)</span></label>
+          <input id="sup-name" name="name" type="text" autocomplete="name" required aria-describedby="name-error" />
+          <p id="name-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="sup-company">Company <span class="req">(required)</span></label>
+          <input id="sup-company" name="company" type="text" autocomplete="organization" required aria-describedby="company-error" />
+          <p id="company-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="sup-city">City or industrial area <span class="req">(required)</span></label>
+          <input id="sup-city" name="city" type="text" autocomplete="address-level2" required aria-describedby="city-error" />
+          <p id="city-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="sup-phone">Phone or WhatsApp <span class="req">(required)</span></label>
+          <input id="sup-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[+0-9 \(\)\-]{10,16}" data-pattern-error="Enter a phone number with 10 to 15 digits." aria-describedby="phone-error" />
+          <p id="phone-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-error="Choose the type of scrap.">
+          <label for="sup-type">Scrap type <span class="req">(required)</span></label>
+          <select id="sup-type" name="scrapType" required aria-describedby="scrapType-error">
+            <option value="">Choose a type</option>
+            <option value="rejects">Rejected molded parts</option>
+            <option value="runners">Runners and sprues</option>
+            <option value="both">Both</option>
+            <option value="other">Other / not sure</option>
+          </select>
+          <p id="scrapType-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="sup-qty">Approximate quantity (kg per month) <span class="req">(required)</span></label>
+          <input id="sup-qty" name="quantity" type="number" inputmode="numeric" min="1" step="1" required aria-describedby="quantity-error" />
+          <p id="quantity-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="sup-notes">Notes</label>
+          <textarea id="sup-notes" name="notes" aria-describedby="notes-hint"></textarea>
+          <p id="notes-hint" class="hint">Grade or colour, glass-filled or not, how it is stored.</p>
+        </div>
+        <button class="btn btn-primary" type="submit" data-event="supplier_form_submit">Send scrap details</button>
+      </form>
+    </section>
+
+    <section class="section" aria-labelledby="sfaq-h">
+      <h2 id="sfaq-h">Supplier questions</h2>
+      {supplierFaqs.map((f) => <FAQItem id={`scrap-${f.id}`} question={f.question} answer={f.answer} level={3} />)}
+      <p><a href={href('/faq/#supplier-questions')}>All supplier questions</a></p>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import '../../scripts/forms';
+</script>

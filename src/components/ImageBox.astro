@@ -1,0 +1,8 @@
+---
+/** Grey wireframe image placeholder. `alt` is required and describes the intended image. */
+interface Props { alt: string; ratio?: string; label?: string }
+const { alt, ratio = '16 / 9', label } = Astro.props;
+---
+<div class="img-box" role="img" aria-label={alt} style={`aspect-ratio: ${ratio}`}>
+  <span aria-hidden="true">IMAGE: {label ?? alt}</span>
+</div>

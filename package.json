@@ -1,0 +1,23 @@
+{
+  "name": "dk-polymer-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "node scripts/make-datasheets.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:links": "node scripts/check-links.mjs",
+    "report:jsonld": "node scripts/jsonld-report.mjs",
+    "report:placeholders": "node scripts/placeholder-report.mjs",
+    "test:e2e": "playwright test",
+    "verify": "npm run build && npm run check:links && npm run report:jsonld && npm run test:e2e"
+  },
+  "dependencies": {
+    "astro": "5.18.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

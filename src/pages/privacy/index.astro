@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Ph from '../../components/Ph.astro';
+---
+<BaseLayout
+  title="Privacy Notice | DK Polymer"
+  description="How DK Polymer handles personal data submitted through this website."
+  path="/privacy/"
+  crumbs={[{ name: 'Privacy', path: '/privacy/' }]}
+>
+  <div class="wrap">
+    <h1>Privacy notice</h1>
+    <p><Ph text="[PLACEHOLDER: full privacy notice to be drafted and reviewed, e.g. against India's Digital Personal Data Protection Act, 2023]" /></p>
+    <h2>What this prototype collects</h2>
+    <p>This prototype collects nothing. Forms are checked in your browser and nothing is stored or sent. The only thing saved is your "Show annotations" preference, in your own browser's local storage.</p>
+    <h2>What the live site will collect</h2>
+    <p><Ph text="[PLACEHOLDER: data collected by forms, purpose, retention, who processes it, analytics and cookies]" /></p>
+    <h2>Contact</h2>
+    <p><Ph text="[PLACEHOLDER: grievance officer or privacy contact]" /></p>
+  </div>
+</BaseLayout>

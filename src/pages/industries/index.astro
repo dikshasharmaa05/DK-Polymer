@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import industries from '../../data/industries.json';
+import { href } from '../../lib/url';
+import IndustryCard from '../../components/IndustryCard.astro';
+import CTA from '../../components/CTA.astro';
+---
+<BaseLayout
+  title="Recycled PBT by Industry: Electrical, Automotive, Appliances | DK Polymer"
+  description="Which recycled PBT grades suit electrical and electronics, automotive component and home appliance molders. Buyer needs, suitable grades and quality expectations."
+  path="/industries/"
+  crumbs={[{ name: 'Industries', path: '/industries/' }]}
+>
+  <div class="wrap">
+    <h1>Industries we supply</h1>
+    <p class="lead">DK Polymer supplies recycled PBT granules to injection molders making parts for electrical and electronics, automotive components and home appliances.</p>
+
+    <section class="section" aria-labelledby="ind-list-h">
+      <h2 id="ind-list-h">Choose your industry</h2>
+      <div class="grid grid-3">
+        {industries.map((i) => <IndustryCard industry={i} />)}
+      </div>
+    </section>
+
+    <p>Looking for a specific grade? <a href={href('/products/')}>Compare all grades</a>.</p>
+
+    <CTA
+      heading="Tell us about your part"
+      text="Share the application and required specifications, and we will suggest a grade."
+      location="industries_overview"
+      actions={[{ label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click' }]}
+    />
+  </div>
+</BaseLayout>

@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import site from '../data/site.json';
+import PrototypeBanner from '../components/PrototypeBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import StickyMobileCta from '../components/StickyMobileCta.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { abs } from '../lib/url';
+import { organization, webSite, webPage, breadcrumbList, localBusiness, type Crumb } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  /** Trail after Home, e.g. [{ name: 'Products', path: '/products/' }]. Omit on Home. */
+  crumbs?: Crumb[];
+  /** Extra JSON-LD nodes for this page (Product, FAQPage, Article…). */
+  schema?: object[];
+  /** Page-level noindex (thank-you, prototype-map, 404). */
+  noindex?: boolean;
+  includeLocalBusiness?: boolean;
+  ogType?: string;
+  lastUpdated?: string;
+}
+
+const {
+  title, description, path, crumbs, schema = [], noindex = false,
+  includeLocalBusiness = false, ogType = 'website', lastUpdated = site.lastUpdated,
+} = Astro.props;
+
+const fullCrumbs: Crumb[] = [{ name: 'Home', path: '/' }, ...(crumbs ?? [])];
+const canonical = abs(path);
+// PROTOTYPE flag: while true, every page is blocked from indexing (see README).
+const robots = site.PROTOTYPE ? 'noindex, nofollow' : noindex ? 'noindex, follow' : 'index, follow';
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organization(),
+    webSite(),
+    webPage(path, title, description, lastUpdated),
+    breadcrumbList(fullCrumbs),
+    ...(includeLocalBusiness ? [localBusiness()] : []),
+    ...schema,
+  ],
+};
+---
+<!doctype html>
+<html lang={site.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline>
+      try { if (localStorage.getItem('dk-annotations') === 'on') document.documentElement.classList.add('show-annotations'); } catch (e) {}
+    </script>
+    <JsonLd data={graph} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <PrototypeBanner />
+    <Header currentPath={path} />
+    {crumbs && <Breadcrumbs crumbs={fullCrumbs} />}
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lastUpdated={lastUpdated} />
+    <StickyMobileCta />
+  </body>
+</html>

@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import products from '../../data/products.json';
+import industries from '../../data/industries.json';
+import { href } from '../../lib/url';
+import { product as productSchema } from '../../lib/schema';
+import SpecTable from '../../components/SpecTable.astro';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import ImageBox from '../../components/ImageBox.astro';
+import CTA from '../../components/CTA.astro';
+
+export function getStaticPaths() {
+  return products.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props;
+const related = industries.filter((i) => p.industries.includes(i.slug));
+const others = products.filter((o) => o.slug !== p.slug);
+const quotePath = `/request-a-quote/?grade=${p.slug}`;
+---
+<BaseLayout
+  title={p.title}
+  description={p.description}
+  path={`/products/${p.slug}/`}
+  crumbs={[{ name: 'Products', path: '/products/' }, { name: p.shortName, path: `/products/${p.slug}/` }]}
+  schema={[productSchema(p)]}
+  ogType="product"
+>
+  <article class="wrap">
+    <div class="grid grid-2">
+      <div>
+        <h1>{p.name}</h1>
+        <Ph as="p" class="small" text={p.gradeNote} />
+        <Annotation tag="GSEO" text="one-paragraph citable summary" />
+        <Ph as="p" class="lead" text={p.summary} />
+        <div class="btn-row">
+          <a class="btn btn-primary" href={href(quotePath)} data-event="cta_quote_click" data-event-location="grade_top" data-grade={p.slug}>Request a quote for {p.shortName}</a>
+          <a class="btn btn-secondary" href={href(`/downloads/datasheet-${p.slug}.pdf`)} data-event="datasheet_download" data-grade={p.slug} download>Download datasheet (PDF)</a>
+        </div>
+        <p class="small">Datasheet is a <Ph text="[PLACEHOLDER: datasheet content to be supplied]" /> file.</p>
+      </div>
+      <ImageBox alt={`${p.name} granules, close-up`} ratio="4 / 3" />
+    </div>
+
+    <section class="section" aria-labelledby="specs-h">
+      <h2 id="specs-h">Specifications</h2>
+      <SpecTable specs={p.specs} caption={`${p.name}: typical properties`} />
+      <p class="small">Values are typical, not guaranteed. A batch test report is <Ph text="[PLACEHOLDER: confirm if supplied with each delivery]" />. See <a href={href('/quality/')}>quality and testing</a>.</p>
+    </section>
+
+    <section class="section" aria-labelledby="apps-h">
+      <h2 id="apps-h">Typical applications</h2>
+      <Ph as="p" text={p.applications} />
+      <ul>
+        {related.map((i) => <li><a href={href(`/industries/${i.slug}/`)}>{i.name}</a></li>)}
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="order-h">
+      <h2 id="order-h">Ordering</h2>
+      <dl>
+        <dt><strong>Minimum order quantity (MOQ)</strong></dt>
+        <dd><Ph text={p.moq} /></dd>
+        <dt><strong>Lead time</strong></dt>
+        <dd><Ph text={p.leadTime} /></dd>
+        <dt><strong>Price</strong></dt>
+        <dd>On request. <Ph text="[PLACEHOLDER: pricing approach undecided]" /></dd>
+      </dl>
+    </section>
+
+    <CTA
+      heading={`Get a quote for ${p.shortName}`}
+      text="The grade is pre-selected in the form. Add your quantity and required specifications."
+      location="grade_bottom"
+      actions={[
+        { label: 'Request a Quote', path: quotePath, event: 'cta_quote_click' },
+        { label: 'Request a sample', path: `${quotePath}&sample=yes`, event: 'cta_sample_click', variant: 'secondary' },
+      ]}
+    />
+
+    <section class="section" aria-labelledby="other-h">
+      <h2 id="other-h">Other grades</h2>
+      <ul>
+        {others.map((o) => <li><a href={href(`/products/${o.slug}/`)}>{o.name}</a></li>)}
+      </ul>
+    </section>
+  </article>
+</BaseLayout>

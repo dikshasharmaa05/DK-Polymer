@@ -1,0 +1,8 @@
+---
+import site from '../data/site.json';
+import { href, waLink } from '../lib/url';
+---
+<div class="sticky-cta" aria-label="Quick actions" role="region">
+  <a class="btn btn-primary" href={href('/request-a-quote/')} data-event="cta_quote_click" data-event-location="sticky_mobile">Get Quote</a>
+  <a class="btn btn-secondary" href={waLink(site.whatsapp.number, site.whatsapp.buyerMessage)} data-event="whatsapp_click" data-event-location="sticky_mobile" rel="noopener">WhatsApp</a>
+</div>

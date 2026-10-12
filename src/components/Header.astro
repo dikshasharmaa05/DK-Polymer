@@ -1,0 +1,45 @@
+---
+import site from '../data/site.json';
+import { href } from '../lib/url';
+import Annotation from './Annotation.astro';
+
+interface Props { currentPath: string }
+const { currentPath } = Astro.props;
+const isCurrent = (p: string) => currentPath === p || (p !== '/' && currentPath.startsWith(p));
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href={href('/')} aria-label="DK Polymer home">
+      <span class="logo-box" aria-hidden="true">LOGO</span>
+      <span class="logo-text">{site.name}</span>
+    </a>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+      <span class="menu-icon" aria-hidden="true"></span>
+      <span class="menu-label">Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        {site.nav.map((item) => (
+          <li><a href={href(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="btn btn-primary header-cta" href={href('/request-a-quote/')} data-event="cta_quote_click" data-event-location="header">Request a Quote</a>
+      <Annotation tag="CONVERSION" text="primary CTA in header" />
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.getElementById('site-nav');
+  if (btn && nav) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
+    });
+  }
+</script>

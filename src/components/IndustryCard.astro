@@ -1,0 +1,12 @@
+---
+import { href } from '../lib/url';
+import ImageBox from './ImageBox.astro';
+interface Props { industry: { slug: string; name: string }; headingLevel?: 2 | 3 }
+const { industry: i, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}`;
+---
+<article class="card">
+  <ImageBox alt={`Typical ${i.name.toLowerCase()} parts molded from PBT`} ratio="4 / 3" />
+  <H><a href={href(`/industries/${i.slug}/`)}>{i.name}</a></H>
+  <a class="btn btn-secondary" href={href(`/industries/${i.slug}/`)} data-event="industry_view_click">Grades for {i.name}</a>
+</article>

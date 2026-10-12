@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "electrical-electronics",
+    "name": "Electrical & Electronics",
+    "title": "Recycled PBT for Electrical & Electronics Molders | DK Polymer",
+    "description": "Recycled PBT granules for electrical and electronics injection molders: buyer needs, suitable grades and quality expectations. DK Polymer, Delhi.",
+    "intro": "Electrical and electronics molders use PBT for parts such as connectors, switch housings and terminal blocks. This page explains how DK Polymer's recycled PBT grades may fit those applications. [PLACEHOLDER: confirm which parts current customers mold].",
+    "problems": [
+      "Need consistent melt flow from batch to batch to avoid short shots and flash.",
+      "Need low moisture to prevent splay and loss of mechanical properties.",
+      "Need documentation for each batch to satisfy their own customers' audits.",
+      "[PLACEHOLDER: buyer problem confirmed in conversations with electrical molders]"
+    ],
+    "expectations": [
+      "Batch test report covering [PLACEHOLDER: parameters].",
+      "Flame-retardancy requirements: [PLACEHOLDER: state whether any grade is suitable for flame-retardant applications. Do not claim this without test data].",
+      "Sample available for trial molding before the first order."
+    ]
+  },
+  {
+    "slug": "automotive-components",
+    "name": "Automotive Components",
+    "title": "Recycled PBT for Automotive Component Molders | DK Polymer",
+    "description": "Recycled PBT granules, including glass-filled PBT, for automotive component molders: buyer needs, suitable grades and quality expectations. DK Polymer, Delhi.",
+    "intro": "Automotive component molders use PBT, often glass-filled, for parts such as housings, brackets and connector bodies. This page explains how DK Polymer's recycled PBT grades may fit those applications. [PLACEHOLDER: confirm which tiers or parts current customers supply].",
+    "problems": [
+      "Need predictable mechanical properties, especially in glass-filled grades.",
+      "Need traceability from granule batch back to source scrap.",
+      "Need stable supply volumes month to month.",
+      "[PLACEHOLDER: buyer problem confirmed in conversations with automotive molders]"
+    ],
+    "expectations": [
+      "Batch test report including glass fibre content for glass-filled grades.",
+      "Customer or OEM approvals: [PLACEHOLDER: list any. Do not claim approvals that do not exist].",
+      "Sample available for trial molding before the first order."
+    ]
+  },
+  {
+    "slug": "home-appliances",
+    "name": "Home Appliances",
+    "title": "Recycled PBT for Home Appliance Molders | DK Polymer",
+    "description": "Recycled PBT granules for home appliance injection molders: buyer needs, suitable grades and quality expectations. DK Polymer, Delhi.",
+    "intro": "Home appliance molders use PBT for parts such as handles, housings and internal components. This page explains how DK Polymer's recycled PBT grades may fit those applications. [PLACEHOLDER: confirm which parts current customers mold].",
+    "problems": [
+      "Need consistent colour and surface finish on visible parts.",
+      "Need a cost-effective alternative to virgin PBT for suitable parts.",
+      "Need reliable lead times aligned with production schedules.",
+      "[PLACEHOLDER: buyer problem confirmed in conversations with appliance molders]"
+    ],
+    "expectations": [
+      "Batch test report covering [PLACEHOLDER: parameters].",
+      "Colour consistency between batches: [PLACEHOLDER: how this is controlled].",
+      "Sample available for trial molding before the first order."
+    ]
+  }
+]

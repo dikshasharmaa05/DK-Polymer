@@ -1,0 +1,19 @@
+---
+import { href } from '../lib/url';
+import type { Crumb } from '../lib/schema';
+import Annotation from './Annotation.astro';
+interface Props { crumbs: Crumb[] }
+const { crumbs } = Astro.props;
+---
+<nav class="breadcrumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((c, i) => (
+      <li>
+        {i === crumbs.length - 1
+          ? <span aria-current="page">{c.name}</span>
+          : <a href={href(c.path)}>{c.name}</a>}
+      </li>
+    ))}
+  </ol>
+  <Annotation tag="SEO" text="breadcrumbs + BreadcrumbList JSON-LD" />
+</nav>

@@ -1,0 +1,59 @@
+---
+import site from '../data/site.json';
+import products from '../data/products.json';
+import { href, waLink } from '../lib/url';
+import NapBlock from './NapBlock.astro';
+import Annotation from './Annotation.astro';
+import Ph from './Ph.astro';
+
+interface Props { lastUpdated: string }
+const { lastUpdated } = Astro.props;
+const prettyDate = new Date(lastUpdated + 'T00:00:00Z').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <section aria-labelledby="footer-contact">
+      <h2 id="footer-contact" class="footer-h">Contact</h2>
+      <NapBlock />
+      <p>
+        <a class="btn btn-secondary" href={waLink(site.whatsapp.number, site.whatsapp.buyerMessage)} data-event="whatsapp_click" data-event-location="footer" rel="noopener">WhatsApp us</a>
+        <span class="small">(<Ph text={site.whatsapp.display} />)</span>
+      </p>
+    </section>
+    <nav aria-labelledby="footer-buyers">
+      <h2 id="footer-buyers" class="footer-h">For buyers</h2>
+      <ul class="plain">
+        <li><a href={href('/products/')}>All grades</a></li>
+        {products.map((p) => <li><a href={href(`/products/${p.slug}/`)}>{p.shortName}</a></li>)}
+        <li><a href={href('/industries/')}>Industries</a></li>
+        <li><a href={href('/quality/')}>Quality</a></li>
+        <li><a href={href('/request-a-quote/')} data-event="cta_quote_click" data-event-location="footer">Request a Quote</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="footer-suppliers">
+      <h2 id="footer-suppliers" class="footer-h">For scrap suppliers</h2>
+      <ul class="plain">
+        <li><a href={href('/sell-your-scrap/')}>Sell your PBT scrap</a></li>
+        <li><a href={href('/faq/#supplier-questions')}>Supplier FAQ</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="footer-company">
+      <h2 id="footer-company" class="footer-h">Company</h2>
+      <ul class="plain">
+        <li><a href={href('/about/')}>About</a></li>
+        <li><a href={href('/resources/')}>Resources</a></li>
+        <li><a href={href('/faq/')}>FAQ</a></li>
+        <li><a href={href('/contact/')}>Contact</a></li>
+        <li><a href={href('/privacy/')}>Privacy</a></li>
+        <li><a href={href('/prototype-map/')}>Prototype map</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>
+      Last updated: <time datetime={lastUpdated}>{prettyDate}</time>
+      <Annotation tag="GSEO" text="visible freshness date, matches dateModified in JSON-LD" />
+    </p>
+    <p>© {new Date(lastUpdated).getFullYear()} {site.name}. Prototype {site.version}.</p>
+  </div>
+</footer>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import faqs from '../../data/faqs.json';
+import { href } from '../../lib/url';
+import { faqPage } from '../../lib/schema';
+import FAQItem from '../../components/FAQItem.astro';
+import Annotation from '../../components/Annotation.astro';
+import CTA from '../../components/CTA.astro';
+
+const buyer = faqs.filter((f) => f.audience === 'buyer');
+const supplier = faqs.filter((f) => f.audience === 'supplier');
+---
+<BaseLayout
+  title="Recycled PBT FAQ for Buyers and Scrap Suppliers | DK Polymer"
+  description="Answers about recycled PBT granules (grades, testing, samples, MOQ) and about selling PBT scrap to DK Polymer (accepted scrap, collection, segregation)."
+  path="/faq/"
+  crumbs={[{ name: 'FAQ', path: '/faq/' }]}
+  schema={[faqPage(faqs)]}
+>
+  <div class="wrap">
+    <h1>Frequently asked questions</h1>
+    <p class="lead">Short, direct answers for buyers of recycled PBT granules and for injection molders selling PBT scrap.</p>
+    <nav aria-label="FAQ sections">
+      <ul>
+        <li><a href="#buyer-questions">Questions from buyers ({buyer.length})</a></li>
+        <li><a href="#supplier-questions">Questions from scrap suppliers ({supplier.length})</a></li>
+      </ul>
+    </nav>
+    <Annotation tag="AEO" text="FAQPage JSON-LD; question H3s with direct answer first" />
+
+    <section class="section" id="buyer-questions" aria-labelledby="buyer-h">
+      <h2 id="buyer-h">Questions from buyers</h2>
+      {buyer.map((f) => <FAQItem id={f.id} question={f.question} answer={f.answer} link={f.link} level={3} />)}
+    </section>
+
+    <section class="section" id="supplier-questions" aria-labelledby="supplier-h">
+      <h2 id="supplier-h">Questions from scrap suppliers</h2>
+      {supplier.map((f) => <FAQItem id={f.id} question={f.question} answer={f.answer} link={f.link} level={3} />)}
+    </section>
+
+    <CTA
+      heading="Question not answered?"
+      location="faq"
+      actions={[
+        { label: 'Contact us', path: '/contact/', event: 'cta_contact_click' },
+        { label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click', variant: 'secondary' },
+      ]}
+    />
+    <p><a href={href('/resources/')}>Read our guides</a></p>
+  </div>
+</BaseLayout>

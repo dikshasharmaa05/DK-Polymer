@@ -1,0 +1,15 @@
+---
+/** Name, address, phone. Always rendered from site.json so it is identical everywhere. */
+import site from '../data/site.json';
+import Ph from './Ph.astro';
+import Annotation from './Annotation.astro';
+const n = site.nap;
+---
+<address class="nap">
+  <Annotation tag="GEO" text="identical NAP from site.json" />
+  <strong>{n.name}</strong><br />
+  {n.streetAddress},<br />
+  {n.locality} <Ph text={n.postalCode} />, {n.country}<br />
+  Phone: <a href={`tel:${n.phoneHref}`} data-event="phone_click"><Ph text={n.phoneDisplay} /></a><br />
+  Email: <a href={`mailto:${n.emailHref}`} data-event="email_click"><Ph text={n.emailDisplay} /></a>
+</address>

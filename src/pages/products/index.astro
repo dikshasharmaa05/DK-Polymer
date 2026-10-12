@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import products from '../../data/products.json';
+import industries from '../../data/industries.json';
+import { href } from '../../lib/url';
+import GradeCard from '../../components/GradeCard.astro';
+import Ph from '../../components/Ph.astro';
+import Annotation from '../../components/Annotation.astro';
+import CTA from '../../components/CTA.astro';
+
+const industryName = (slug: string) => industries.find((i) => i.slug === slug)?.name ?? slug;
+const specValue = (p: (typeof products)[number], prop: string) => p.specs.find((s) => s.property.startsWith(prop))?.value ?? '–';
+---
+<BaseLayout
+  title="Recycled PBT Grades: Natural, Black, GF30 | DK Polymer"
+  description="Compare DK Polymer's recycled PBT grades (Natural, Black and 30% glass-filled) made from post-industrial scrap. Specifications, applications and quote requests."
+  path="/products/"
+  crumbs={[{ name: 'Products', path: '/products/' }]}
+>
+  <div class="wrap">
+    <h1>Recycled PBT grades</h1>
+    <p class="lead">DK Polymer produces recycled PBT granules from post-industrial scrap collected from injection molders. Each grade has its own specification page.</p>
+    <Ph as="p" text="[PLACEHOLDER: confirm final grade list and whether custom grades or compounding are offered]" />
+
+    <section class="section" aria-labelledby="compare-h">
+      <Annotation tag="GSEO" text="comparison as HTML table" />
+      <h2 id="compare-h">Grade comparison</h2>
+      <div class="table-scroll" role="region" aria-label="Grade comparison" tabindex="0">
+        <table>
+          <caption>Recycled PBT grades at a glance</caption>
+          <thead><tr><th scope="col">Grade</th><th scope="col">Glass fibre (%)</th><th scope="col">MFI (g/10 min)</th><th scope="col">Typical industries</th></tr></thead>
+          <tbody>
+            {products.map((p) => (
+              <tr>
+                <th scope="row"><a href={href(`/products/${p.slug}/`)}>{p.name}</a></th>
+                <td><Ph text={specValue(p, 'Glass')} /></td>
+                <td><Ph text={specValue(p, 'Melt')} /></td>
+                <td>{p.industries.map((s, i) => <>{i > 0 && ', '}<a href={href(`/industries/${s}/`)}>{industryName(s)}</a></>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="all-grades-h">
+      <h2 id="all-grades-h">All grades</h2>
+      <div class="grid grid-3">
+        {products.map((p) => <GradeCard product={p} />)}
+      </div>
+    </section>
+
+    <p>Not sure which grade fits your part? See <a href={href('/industries/')}>grades by industry</a> or read <a href={href('/quality/')}>how we test each batch</a>.</p>
+
+    <CTA
+      heading="Request a quote or sample"
+      location="products_overview"
+      actions={[{ label: 'Request a Quote', path: '/request-a-quote/', event: 'cta_quote_click' }]}
+    />
+  </div>
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+/** Call-to-action block. Every link carries a data-event attribute for future analytics. */
+import { href } from '../lib/url';
+import Annotation from './Annotation.astro';
+
+interface Action { label: string; path: string; event: string; variant?: 'primary' | 'secondary'; external?: boolean }
+interface Props { heading: string; text?: string; actions: Action[]; location: string; headingLevel?: 2 | 3 }
+const { heading, text, actions, location, headingLevel = 2 } = Astro.props;
+const H = `h${headingLevel}`;
+---
+<section class="cta-block">
+  <Annotation tag="CONVERSION" text={`CTA (${location})`} />
+  <H>{heading}</H>
+  {text && <p>{text}</p>}
+  <div class="btn-row">
+    {actions.map((a) => (
+      <a
+        class={`btn btn-${a.variant ?? 'primary'}`}
+        href={a.external ? a.path : href(a.path)}
+        data-event={a.event}
+        data-event-location={location}
+        rel={a.external ? 'noopener' : undefined}
+      >{a.label}</a>
+    ))}
+  </div>
+</section>

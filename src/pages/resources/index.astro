@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import articles from '../../data/articles.json';
+import { href } from '../../lib/url';
+import Ph from '../../components/Ph.astro';
+---
+<BaseLayout
+  title="Recycled PBT Guides and Articles | DK Polymer Resources"
+  description="Guides on recycled PBT for injection molders and buyers: what recycled PBT is, how it is made and how to specify it."
+  path="/resources/"
+  crumbs={[{ name: 'Resources', path: '/resources/' }]}
+>
+  <div class="wrap">
+    <h1>Resources</h1>
+    <p class="lead">Guides on recycled PBT for buyers and injection molders.</p>
+    <section class="section" aria-labelledby="articles-h">
+      <h2 id="articles-h">Articles</h2>
+      <div class="grid grid-3">
+        {articles.map((a) => (
+          <article class="card">
+            <h3><a href={href(`/resources/${a.slug}/`)}>{a.headline}</a></h3>
+            <p>{a.excerpt}</p>
+            <p class="small">Updated <time datetime={a.dateModified}>{a.dateModified}</time></p>
+          </article>
+        ))}
+        <article class="card">
+          <h3><Ph text="[PLACEHOLDER: future article, e.g. How to specify recycled PBT]" /></h3>
+          <p class="small">Planned for v0.2.</p>
+        </article>
+      </div>
+    </section>
+    <p>Have a question? See the <a href={href('/faq/')}>FAQ</a>.</p>
+  </div>
+</BaseLayout>

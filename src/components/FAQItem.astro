@@ -1,0 +1,13 @@
+---
+/** Question as a heading with a direct 1–2 sentence answer immediately below (AEO pattern). */
+import { href } from '../lib/url';
+import Ph from './Ph.astro';
+interface Props { id: string; question: string; answer: string; link?: { label: string; path: string }; level?: 2 | 3 }
+const { id, question, answer, link, level = 2 } = Astro.props;
+const H = `h${level}`;
+---
+<div class="faq-item" id={id}>
+  <H>{question}</H>
+  <Ph as="p" class="answer" text={answer} />
+  {link && <p class="small"><a href={href(link.path)}>{link.label} →</a></p>}
+</div>
