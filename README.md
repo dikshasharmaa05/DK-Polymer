@@ -93,7 +93,7 @@ The output is plain files in `dist/`. Any static host works.
 
 **Netlify:** build command `npm run build`, publish directory `dist`. `404.html` is picked up automatically.
 
-**Vercel:** framework preset "Astro" (or "Other"), build command `npm run build`, output directory `dist`.
+**Vercel:** `vercel.json` already sets the framework (Astro), install command (`npm ci`), build command (`npm run build`) and output directory (`dist`). In Vercel, choose **Add New → Project**, import `dikshasharmaa05/DK-Polymer` and click **Deploy**; no settings need changing. Vercel deploys the repository's production branch (usually `main`) to the production URL, and every other branch gets its own preview URL. Once the real domain is known, set `SITE_URL` under Project → Settings → Environment Variables so canonical tags and sitemaps use it.
 
 **GitHub Pages** (project site at `https://<user>.github.io/DK-Polymer/`): the site must know its sub-path. Build with:
 
