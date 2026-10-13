@@ -66,6 +66,8 @@ test('RFQ: grade pre-filled from query, valid submit reaches thank-you', async (
   await page.fill('#rfq-email', 'buyer@example.com');
   await page.fill('#rfq-quantity', '500');
   await page.check('#rfq-sample-yes');
+  await page.fill('#rfq-address', 'Plot 12, Sector 5, Bawana Industrial Area');
+  await page.fill('#rfq-pin', '110039');
   await page.getByRole('button', { name: 'Send quote request' }).click();
   await expect(page).toHaveURL(/\/thank-you\/\?type=quote$/);
   await expect(page.locator('[data-variant="quote"]')).toBeVisible();
@@ -85,4 +87,31 @@ test('annotations toggle shows labels and persists across pages', async ({ page 
   await page.goto('/quality/');
   await expect(page.locator('[data-anno-toggle]')).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('main .anno').first()).toBeVisible();
+});
+
+test('RFQ: sample address appears only when a sample is requested', async ({ page }, info) => {
+  // "Request a sample" links land here with ?sample=yes: address is shown straight away.
+  await page.goto('/request-a-quote/?sample=yes');
+  const address = page.locator('#sample-address');
+  await expect(address).toBeVisible();
+  await page.screenshot({ path: `screenshots/${info.project.name}-rfq-sample-address.png`, fullPage: true });
+
+  // Address is required while visible.
+  await page.getByRole('button', { name: 'Send quote request' }).click();
+  await expect(page.locator('#address-error')).toHaveText('This field is required.');
+  await page.fill('#rfq-pin', '12');
+  await page.getByRole('button', { name: 'Send quote request' }).click();
+  await expect(page.locator('#pin-error')).toHaveText('Enter a 6-digit PIN code, e.g. 110039.');
+
+  // Choosing "No" hides it and it no longer blocks submission.
+  await page.check('#rfq-sample-no');
+  await expect(address).toBeHidden();
+  await page.getByRole('button', { name: 'Send quote request' }).click();
+  await expect(page.locator('[data-error-summary]')).not.toContainText('Delivery address');
+
+  // Plain quote link: hidden until "Yes" is chosen.
+  await page.goto('/request-a-quote/');
+  await expect(address).toBeHidden();
+  await page.check('#rfq-sample-yes');
+  await expect(address).toBeVisible();
 });

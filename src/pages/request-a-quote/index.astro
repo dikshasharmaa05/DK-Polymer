@@ -5,6 +5,7 @@ import products from '../../data/products.json';
 import { href, waLink } from '../../lib/url';
 import Annotation from '../../components/Annotation.astro';
 import ErrorSummary from '../../components/ErrorSummary.astro';
+import Ph from '../../components/Ph.astro';
 ---
 <BaseLayout
   title="Request a Quote for Recycled PBT Granules | DK Polymer"
@@ -82,6 +83,25 @@ import ErrorSummary from '../../components/ErrorSummary.astro';
         <p id="sample-error" class="error-msg" aria-live="polite"></p>
       </fieldset>
 
+      <!-- Shown only when a sample is requested, so the buyer gives the delivery address in the same step.
+           While hidden, the fieldset is disabled, which skips its fields in validation. -->
+      <fieldset class="field sample-address" id="sample-address" data-sample-address hidden disabled>
+        <legend>Where should we send the sample?</legend>
+        <Annotation tag="CONVERSION" text="sample address in the same form: no second step" />
+        <div class="field">
+          <label for="rfq-address">Delivery address <span class="req">(required)</span></label>
+          <textarea id="rfq-address" name="address" autocomplete="street-address" required aria-describedby="address-hint address-error"></textarea>
+          <p id="address-hint" class="hint">Factory or plot number, street, industrial area. City is taken from above.</p>
+          <p id="address-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="rfq-pin">PIN code <span class="req">(required)</span></label>
+          <input id="rfq-pin" name="pin" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" required pattern="[1-9][0-9]{5}" data-pattern-error="Enter a 6-digit PIN code, e.g. 110039." aria-describedby="pin-error" />
+          <p id="pin-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        <p class="hint">Sample size, cost and delivery time: <Ph text="[PLACEHOLDER: confirm sample policy]" /></p>
+      </fieldset>
+
       <div>
         <button class="btn btn-primary" type="submit" data-event="rfq_submit">Send quote request</button>
         <Annotation tag="CONVERSION" text="primary conversion; data-event=rfq_submit" />
@@ -103,4 +123,15 @@ import ErrorSummary from '../../components/ErrorSummary.astro';
     const radio = document.getElementById(`rfq-sample-${sample}`) as HTMLInputElement | null;
     if (radio) radio.checked = true;
   }
+
+  // Show the sample delivery address as soon as "Yes" is chosen (or pre-filled from ?sample=yes).
+  const addressBox = document.querySelector<HTMLFieldSetElement>('[data-sample-address]');
+  const syncAddress = () => {
+    if (!addressBox) return;
+    const wantsSample = (document.getElementById('rfq-sample-yes') as HTMLInputElement).checked;
+    addressBox.hidden = !wantsSample;
+    addressBox.disabled = !wantsSample;
+  };
+  document.querySelectorAll('input[name="sample"]').forEach((r) => r.addEventListener('change', syncAddress));
+  syncAddress();
 </script>
